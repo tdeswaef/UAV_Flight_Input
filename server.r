@@ -1,7 +1,4 @@
-# library(shiny)
-# library(stringr)
-# library(XLConnect)
-
+### Server function of the Shiny application
 
 shinyServer(function(input, output) {
 
@@ -39,7 +36,7 @@ shinyServer(function(input, output) {
             
             Folders <- dir(F1, include.dirs = T, pattern = "Beelden", recursive = T, full.names = T)
             Year <- str_split(as.character(input$Datum), "-")[[1]][1]
-            wb <- loadWorkbook(filename = paste0(PATH, "/", "Stitch_monitor.xlsx"), create = T)
+            wb <- loadWorkbook(filename = paste0(PATH, "/", Excelfile), create = T)
             if(!existsSheet(wb, Year)){
                 createSheet(wb, Year)
                 writeWorksheet(wb, data = t(c("Link", "Folder", "Project", "Date", "Locatie", "Gewas", "Sensor", "Piloot", "Spotter", "Opmerking", "Verwerkt door",
@@ -73,7 +70,7 @@ shinyServer(function(input, output) {
             }
             
             
-            saveWorkbook(wb, file = paste0(PATH, "/", "Stitch_monitor.xlsx"))
+            saveWorkbook(wb, file = paste0(PATH, "/", Excelfile))
         }
         
     } )
