@@ -1,9 +1,4 @@
-# library(shiny)
-# library(stringr)
-# library(XLConnect)
-
-
-# Define UI for application that draws a histogram
+### User Interface function for the Shiny application
 shinyUI(fluidPage(
 
     # Application title
