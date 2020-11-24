@@ -4,6 +4,7 @@ pacman::p_load(shiny, tidyverse, readr, stringr, XLConnect, rstudioapi)
 
 ### Set the PATH to the folder in which UAV data are stored (Q-drive)
 PATH <- "//clo.be/dfs/Data/iSense/Vluchtfotos/"
+Excelfile <- "Stitch_monitor.xlsx"
 
 ### Set the folder address where the app files are located on your desktop
 folder_address = getActiveDocumentContext()$path %>% 
