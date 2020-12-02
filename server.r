@@ -12,22 +12,33 @@ shinyServer(function(input, output) {
                      paste0(str_remove_all(as.character(input$Datum), "-"),"_",input$Veld,"_", input$Soort)
         )
         A_list <- list("Coordinatenreferenties", "Stitch_Agisoft", "Stitch_Pix4D", "Waypoints_wpl_gpx_gpscoord")
-        
+        Folder_seq <- str_split(F1, "/", simplify = T) %>% as.vector()
         
         if(dir.exists(F1)){
             output$Succes <-  renderText(("Deze map bestaat al"))
         } else {
-            dir.create(F1, recursive = T)
+            if(!dir.exists(str_c(Folder_seq[1:(length(Folder_seq)-3)], collapse="/"))) {
+                dir.create(str_c(Folder_seq[1:(length(Folder_seq)-3)], collapse="/"))
+            }
+            if(!dir.exists(str_c(Folder_seq[1:(length(Folder_seq)-2)], collapse="/"))) {
+                dir.create(str_c(Folder_seq[1:(length(Folder_seq)-2)], collapse="/"))
+            }
+            if(!dir.exists(str_c(Folder_seq[1:(length(Folder_seq)-1)], collapse="/"))) {
+                dir.create(str_c(Folder_seq[1:(length(Folder_seq)-1)], collapse="/"))
+            }
+            dir.create(F1, recursive = F)
             lapply(A_list, function(x) {
                 dir.create(paste0(F1,"/", x))
             })
             if("RGB" %in% substr(input$Sensor, 1, 3)){
-                dir.create(paste0(F1,"/", "Beelden_RGB/jpg"), recursive = T)
-                dir.create(paste0(F1,"/", "Beelden_RGB/raw"), recursive = T)
+                dir.create(paste0(F1,"/", "Beelden_RGB"))
+                dir.create(paste0(F1,"/", "Beelden_RGB/jpg"))
+                dir.create(paste0(F1,"/", "Beelden_RGB/raw"))
             }
             if("MS" %in% substr(input$Sensor,1,2)){
-                dir.create(paste0(F1,"/", "Beelden_MS/MS blauw"), recursive = T)
-                dir.create(paste0(F1,"/", "Beelden_MS/MS rood"), recursive = T)
+                dir.create(paste0(F1,"/", "Beelden_MS"))
+                dir.create(paste0(F1,"/", "Beelden_MS/MS blauw"))
+                dir.create(paste0(F1,"/", "Beelden_MS/MS rood"))
             }
             if("Thermaal" %in% input$Sensor){
                 dir.create(paste0(F1,"/", "Beelden_Thermaal"))

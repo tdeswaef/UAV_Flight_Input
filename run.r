@@ -3,8 +3,8 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(shiny, tidyverse, readr, stringr, XLConnect)
 
 ### Set the PATH to the folder in which UAV data are stored (Q-drive)
-#PATH <- "//clo.be/dfs/Data/iSense/Vluchtfotos/"
-PATH <- "C:/Users/tdeswaef/Documents/Applications/"
+PATH <- "//clo.be/dfs/Data/iSense/Vluchtfotos/"
+#PATH <- "C:/Users/tdeswaef/Documents/Applications/"
 Excelfile <- "Stitch_monitor.xlsx"
 
 ### Set the folder address where the app files are located on your desktop
