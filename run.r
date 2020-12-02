@@ -1,15 +1,14 @@
 ### Install and load required libraries using pacman
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(shiny, tidyverse, readr, stringr, XLConnect, rstudioapi)
+pacman::p_load(shiny, tidyverse, readr, stringr, XLConnect)
 
 ### Set the PATH to the folder in which UAV data are stored (Q-drive)
-PATH <- "//clo.be/dfs/Data/iSense/Vluchtfotos/"
+#PATH <- "//clo.be/dfs/Data/iSense/Vluchtfotos/"
+PATH <- "C:/Users/tdeswaef/Documents/Applications/"
 Excelfile <- "Stitch_monitor.xlsx"
 
 ### Set the folder address where the app files are located on your desktop
-folder_address = getActiveDocumentContext()$path %>% 
-                 dirname() %>% 
-                 str_replace_all("/", "//")
+folder_address = "C://Users//tdeswaef//Documents//Applications//UAVDataApp//UAV_Flight_Input"
 
 ### DON'T CHANGE
 ### Set the working directory, read the metadata base files (.csv)
@@ -23,3 +22,4 @@ Spotters <- read_csv("./InputFiles/Spotter.csv", col_names = F)[[1]] %>% as.vect
 
 ### Run the application in your standard browser
 runApp(folder_address, launch.browser=TRUE)
+
