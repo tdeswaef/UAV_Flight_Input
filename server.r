@@ -32,22 +32,27 @@ shinyServer(function(input, output) {
             lapply(A_list, function(x) {
                 dir.create(paste0(F1,"/", x))
             })
+            SelectedSensors <- c()
             if("RGB" %in% substr(input$Sensor, 1, 3) & !dir.exists(paste0(F1,"/", "Beelden_RGB"))){
                 dir.create(paste0(F1,"/", "Beelden_RGB"))
                 dir.create(paste0(F1,"/", "Beelden_RGB/jpg"))
                 dir.create(paste0(F1,"/", "Beelden_RGB/raw"))
+                SelectedSensors <- append(SelectedSensors, "RGB")
             }
             if("MS" %in% substr(input$Sensor,1,2) & !dir.exists(paste0(F1,"/", "Beelden_MS"))){
                 dir.create(paste0(F1,"/", "Beelden_MS"))
                 dir.create(paste0(F1,"/", "Beelden_MS/MS blauw"))
                 dir.create(paste0(F1,"/", "Beelden_MS/MS rood"))
+                SelectedSensors <- append(SelectedSensors, "MS")
             }
             if("Thermaal" %in% input$Sensor & !dir.exists(paste0(F1,"/", "Beelden_Thermaal"))){
                 dir.create(paste0(F1,"/", "Beelden_Thermaal"))
+                SelectedSensors <- append(SelectedSensors, "Thermaal")
             }
             output$Succes <-  renderText(("Nieuwe map gemaakt!"))
             
-            Folders <- dir(F1, include.dirs = T, pattern = "Beelden", recursive = T, full.names = T)
+            Folders <- dir(F1, include.dirs = T, pattern =  paste0(SelectedSensors, collapse="|"), recursive = T, full.names = T)
+           
             Year <- str_split(as.character(input$Datum), "-")[[1]][1]
             wb <- loadWorkbook(filename = paste0(PATH, "/", Excelfile), create = T)
             if(!existsSheet(wb, Year)){
