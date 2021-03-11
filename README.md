@@ -25,6 +25,7 @@ ShortCut to run the app:
 - Make sure that [R](https://cran.r-project.org/bin/windows/base/) is installed
 - Download the files and save them in a single folder
 - In the [run.r](run.r) file set the PATH variable to the data location (default: Q-drive)
+- In the [run.r](run.r) file set the folder_address variable to the folder where the application files are stored
 - In the [UAV_input.bat](UAV_input.bat) file modify two paths:
     - Path to the Rscript.exe file on your PC
     - Path to the run.r file on your PC
